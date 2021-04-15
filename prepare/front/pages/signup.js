@@ -2,18 +2,35 @@ import React, { useCallback,useState } from 'react';
 import AppLayout from '../components/Applayout';
 import useInput from '../hooks/useInput';
 import Head from 'next/head';
-import { Form, Input } from 'antd';
+import styled from 'styled-components';
+import { Form, Input, Checkbox, Button } from 'antd';
+
+const ErrorMessage = styled.div`
+    color: red;
+`;
 
 const Signup = () => {
     const onSubmit = useCallback(()=>{
-
-    }, [])
+        if(password != passwordCheck) {
+            return setPasswordError(true);
+        }
+        if(!term) {
+            return setTermError(true);
+        }
+    }, [password, passwordCheck, term])
 
     const [id, onChangeId] = useInput('');
     const [password, onChangePassword] = useInput('');
     const [nickname, onChangeNickname] = useInput('');
     const [passwordCheck, setPasswordCheck] = useState('');
     const [passwordError, setPasswordError] = useState(false);
+    const [termError, setTermError] = useState(false)
+    const [term, setTerm] = useState('');
+
+    const onChangeTerm = useCallback((e)=> {
+        setTerm(e.target.checked);
+        setTermError(false);
+    }, [])
 
     const onChangePasswordCheck = useCallback((e)=> {
         setPasswordCheck(e.target.value);
@@ -66,6 +83,12 @@ const Signup = () => {
                         onChange={onChangePasswordCheck}
                         required
                     />
+                    {passwordError && <ErrorMessage >비밀번호가 일치하지 않습니다.</ErrorMessage> }
+                </div>
+                <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>회원가입 약관에 동의합니다.</Checkbox>
+                {termError && <ErrorMessage>약관에 동의해야 합니다.</ErrorMessage>}
+                <div style={{ marginTop: 10}}>
+                    <Button type="primary" htmlType="submit">가입하기</Button>
                 </div>
                 </Form>
             </AppLayout>
