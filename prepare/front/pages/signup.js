@@ -10,6 +10,14 @@ const ErrorMessage = styled.div`
 `;
 
 const Signup = () => {
+    const [id, onChangeId] = useInput('');
+    const [password, onChangePassword] = useInput('');
+    const [nickname, onChangeNickname] = useInput('');
+    const [passwordCheck, setPasswordCheck] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
+    const [termError, setTermError] = useState(false)
+    const [term, setTerm] = useState('');
+
     const onSubmit = useCallback(()=>{
         if(password != passwordCheck) {
             return setPasswordError(true);
@@ -18,14 +26,6 @@ const Signup = () => {
             return setTermError(true);
         }
     }, [password, passwordCheck, term])
-
-    const [id, onChangeId] = useInput('');
-    const [password, onChangePassword] = useInput('');
-    const [nickname, onChangeNickname] = useInput('');
-    const [passwordCheck, setPasswordCheck] = useState('');
-    const [passwordError, setPasswordError] = useState(false);
-    const [termError, setTermError] = useState(false)
-    const [term, setTerm] = useState('');
 
     const onChangeTerm = useCallback((e)=> {
         setTerm(e.target.checked);
@@ -42,7 +42,6 @@ const Signup = () => {
             <Head>
                 <title>회원가입 | NodeBird</title>
             </Head>
-            <AppLayout>
                 <Form onFinish={onSubmit}>
                 <div>
                     <label htmlFor="user-id">아이디</label>
@@ -91,7 +90,6 @@ const Signup = () => {
                     <Button type="primary" htmlType="submit">가입하기</Button>
                 </div>
                 </Form>
-            </AppLayout>
         </AppLayout>
     );
 };
