@@ -25,6 +25,7 @@ const Signup = () => {
         if(!term) {
             return setTermError(true);
         }
+        console.log(id, nickname, password);
     }, [password, passwordCheck, term])
 
     const onChangeTerm = useCallback((e)=> {
@@ -68,6 +69,7 @@ const Signup = () => {
                     <br />
                     <Input
                         name="user-password"
+                        type="password"
                         value={password}
                         onChange={onChangePassword}
                         required
@@ -78,6 +80,7 @@ const Signup = () => {
                     <br />
                     <Input
                         name="user-password-check"
+                        type="password"
                         value={passwordCheck}
                         onChange={onChangePasswordCheck}
                         required
