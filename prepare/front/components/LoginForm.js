@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Form, Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { loginAction } from '../reducers';
+import { loginAction } from '../reducers/user';
 import useInput from '../hooks/useInput';
 
 const ButtonWrapper = styled.div`
