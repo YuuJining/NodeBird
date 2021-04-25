@@ -12,6 +12,7 @@ const SearchInput = styled(Input.Search)`
 `;
 const AppLayout = ({children}) => {
     const isLoggedIn = useSelector((state)=>state.user.isLoggedIn);
+    // const { isLoggedIn } useSelector((state)=>state.user) 이런식으로 구조분해 할당으로도 가능함
     return (
         <div>
             <Menu mode="horizontal">
